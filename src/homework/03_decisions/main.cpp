@@ -4,7 +4,6 @@
 
 using std::cout; using std::cin;
 
-
 int main() 
 {	
 	auto menu_option= 0;

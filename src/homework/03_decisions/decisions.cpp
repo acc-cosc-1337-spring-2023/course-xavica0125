@@ -3,6 +3,7 @@
 
 
 //Write code for function(s) code here
+
 char get_letter_grade_using_if(int grade)
 {
     if (grade >= 90 && grade <= 100)
