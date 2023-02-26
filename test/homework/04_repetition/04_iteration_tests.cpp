@@ -11,3 +11,10 @@ TEST_CASE("Verify factorial function")
 	REQUIRE(factorial(5)== 120 );
 	REQUIRE(factorial(6)== 720);
 }
+
+TEST_CASE("Verify greatest common divisor function")
+{
+	REQUIRE(gcd(5,15)==5);
+	REQUIRE(gcd(21,28)==7);
+	REQUIRE(gcd(25,100)==25);
+}
