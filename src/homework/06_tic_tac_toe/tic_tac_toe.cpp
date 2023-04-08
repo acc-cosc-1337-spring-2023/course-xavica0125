@@ -1,5 +1,6 @@
 //cpp
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 bool TicTacToe::check_board_full()
 {
     bool full = true;
@@ -30,18 +31,6 @@ void TicTacToe::set_next_player()
         player = "X";
     }
     
-}
-
-void TicTacToe::display_board() const
-{
-    for(int i = 0; i < pegs.size(); i++)
-    {
-        cout<<pegs[i]<<"|";
-        if((i+1) % 3 == 0)
-        {
-            cout<<"\n";
-        }
-    }
 }
 
 string TicTacToe:: get_player() const
@@ -212,36 +201,60 @@ bool TicTacToe::check_column_win()
     return win; 
 }    
 
+std::istream& operator>>(std::istream& num, TicTacToe& game)
+{
+    int position;   
+    cout <<"Please enter a position (1-9): ";
+    num >> position;
+    game.mark_board(position);
+    return num;
+}
+
+std::ostream& operator<<(std::ostream& out,const TicTacToe& game)
+{
+    out<< game.pegs[0] << "|" << game.pegs[1] << "|"<< game.pegs[2]<<"\n";
+    out<< game.pegs[3] << "|" << game.pegs[4] << "|"<< game.pegs[5]<<"\n";
+    out<< game.pegs[6] << "|" << game.pegs[7] << "|"<< game.pegs[8]<<"\n";
+    return out;
+}
+
 void main_menu()
 {
+    TicTacToeManager manager;
     string continue_playing;
-    do 
-    {
-        string choice;
-        while(choice != "X" && choice != "O")
-        {
-            cout << "Please enter (X or O): ";
-            cin >> choice;
-        }
-        if(choice == "X" || choice == "O")
-        {
-            TicTacToe game;
-            game.start_game(choice);
-            do
-            {  
-                int position;
-                do
-                {
-                    cout <<"Please enter a position (1-9): ";
-                    cin >> position;
-                }while(position < 1 && position > 9);
-                game.mark_board(position);
-                game.display_board();
-            }while (!game.game_over());
-            cout<<"Winner is "<<game.get_winner()<<"!!!\n";
-            cout << "Do you want to continue playing? (Y/N): ";
-            cin >> continue_playing;
-        }
-    }while(continue_playing == "Y" || continue_playing == "y");  
-         
+    string choice;
+	do
+	{
+  		cout << "Please enter (X or O): ";
+    	cin >> choice;      
+    	if(choice == "X" || choice == "O")
+    	{
+        	TicTacToe game;
+        	game.start_game(choice);
+			do
+			{
+				cin >> game;
+				cout << game <<"\n";
+				
+			} while (!game.game_over());
+			manager.save_game(game);
+		}
+		scoreboard(manager);
+        cout << "Do you want to continue playing? (Y/N): ";
+        cin >> continue_playing;
+    		
+	}while(continue_playing != "N" && continue_playing != "n");
+	
+	
+	cout << manager << "\n";
+    scoreboard(manager);
+}
+
+void scoreboard(TicTacToeManager manager)
+{
+    int o_wins,x_wins,ties;
+		manager.get_winner_total(o_wins,x_wins,ties);
+		cout << "O Wins: " << o_wins <<"\n";
+		cout << "X Wins: " << x_wins <<"\n";
+		cout << "Ties: " << ties <<"\n";
 }
