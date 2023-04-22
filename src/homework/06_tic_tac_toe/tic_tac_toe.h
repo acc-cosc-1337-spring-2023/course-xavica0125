@@ -23,6 +23,8 @@ class TicTacToe
         virtual bool check_column_win();
     public:
         TicTacToe(int size) : pegs(size*size," ") {}
+        TicTacToe(vector<string> p , string win) : pegs(p), winner(w) {}
+        vector<string> get_pegs() const {return pegs;}
         bool game_over();
         void start_game(string first_player);
         void mark_board(int position);

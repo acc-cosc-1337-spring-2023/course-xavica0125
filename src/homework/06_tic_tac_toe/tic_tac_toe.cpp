@@ -3,6 +3,7 @@
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
+#include "tic_tac_toe_data.h"
 bool TicTacToe::check_board_full()
 {
     bool full = true;
@@ -151,13 +152,17 @@ std::ostream& operator<<(std::ostream& out,const TicTacToe& game)
     return out;
 }
 
+
+
+
 void main_menu()
 {
-    TicTacToeManager manager;
     string continue_playing;
     string choice;
     string game_type;
     unique_ptr <TicTacToe> game;
+    TicTacToeData data_inst;
+    TicTacToeManager manager(data_inst);
 	do
 	{
   		cout << "Please enter (X or O): ";
