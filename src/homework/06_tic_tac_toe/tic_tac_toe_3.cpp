@@ -1,32 +1,108 @@
 #include "tic_tac_toe_3.h"
 
-/*
-class function check_column_win
-Win by column if and return true if
-0,3, and 6 are equal
-1, 4, and 7
-2, 5, and 8
-else
-false
-*/
+bool TicTacToe3:: check_column_win()
+{
+    bool win = false;
+    
+    for(int i = 0; i < 3; i++)
+    {
+        int x_count = 0;
+        int o_count = 0;
+        for(int j = 0; j < 3; j++)
+        {
+            if(pegs[i+j*3] == "X")
+            {
+                x_count++;
+            }
 
+            else if(pegs[i+j*3] == "O")
+            {
+                o_count++;
+            }
+        }
+        if(x_count == 3 || o_count == 3)
+        {
+            win = true;
+        }
+    }
+    return win;
+}
 
+bool TicTacToe3:: check_diagonal_win()
+{
+    bool win = false;
+    int x_count = 0;
+    int o_count = 0;
+    for(int i = 0; i < 10; i+=4)
+    {
+        if(pegs[i] == "X")
+        {
+            x_count++;
+        }
 
-/*
-class function check_row_win
-Win by row if
-0, 1, 2 are equal
-3,4,5 are equal
-6,7,8 are equal
-*/
+        else if(pegs[i] == "O")
+        {
+            o_count++;
+        }
+    }
+    if(x_count == 3 || o_count == 3)
+    {
+        win = true;
+    }
+    else
+    {
+        x_count = 0;
+        o_count = 0;
+        for(int i = 2; i < 7; i+=2)
+        {
+            if(pegs[i] == "X")
+            {
+                x_count++;
+            }
 
+            else if(pegs[i] == "O")
+            {
+                o_count++;
+            }
+        }
+        if(x_count == 3 || o_count == 3)
+        {
+            win = true;
+        }
+    }
+    return win;
+}
 
+bool TicTacToe3:: check_row_win()
+{
+    bool win = false;
+    if (pegs[0] == "X" && pegs[1] == "X" && pegs[2] == "X") 
+    {
+        win = true;
+    } 
+    else if (pegs[0] == "O" && pegs[1] == "O" && pegs[2] == "O") 
+    {
+        win = true;
+    }
 
-/*
-class function check_diagonal_win
-Win diagonally
-0 1 2
-3 4 5
-6 7 8
+    if (pegs[3] == "X" && pegs[4] == "X" && pegs[5] == "X") 
+    {
+        win = true;
+    } 
+    else if (pegs[3] == "O" && pegs[4] == "O" && pegs[5] == "O") 
+    {
+        win = true;
+    }
 
-*/
+    if (pegs[6] == "X" && pegs[7] == "X" && pegs[8] == "X") 
+    {
+        win = true;
+    } 
+    else if (pegs[6] == "O" && pegs[7] == "O" && pegs[8] == "O") 
+    {
+        win = true;
+    }
+
+    return win;
+}
+
