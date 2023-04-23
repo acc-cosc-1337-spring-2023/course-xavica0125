@@ -4,7 +4,7 @@
 void TicTacToeData:: save_games(const vector<unique_ptr<TicTacToe>>& games)
 {
     ofstream outfile;
-    outfile.open("C:\Users\xavie\OneDrive\Documents\TicTacToeData.txt");
+    outfile.open("C:/Users/xavie/OneDrive/Documents/data.txt", std::ios::app);
     for(auto& game : games)
     {
         auto pegs = game-> get_pegs();
@@ -21,8 +21,7 @@ void TicTacToeData:: save_games(const vector<unique_ptr<TicTacToe>>& games)
 vector<unique_ptr<TicTacToe>> TicTacToeData :: get_games()
 {
     vector<unique_ptr<TicTacToe>> games;
-    ifstream infile;
-    infile.open("C:\Users\xavie\OneDrive\Documents\TicTacToeData.txt");
+    ifstream infile("C:/Users/xavie/OneDrive/Documents/data.txt", std::ios::out);
     string line;
     if(infile.is_open())
     {
@@ -53,7 +52,4 @@ vector<unique_ptr<TicTacToe>> TicTacToeData :: get_games()
         
     
 }
-
-
-
 

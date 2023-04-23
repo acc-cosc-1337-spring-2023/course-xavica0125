@@ -40,9 +40,9 @@ void TicTacToeManager:: update_winner_count(string winner)
     }
 }
 
-TicTacToeManager:: TicTacToeManager(TicTacToeData d): data{d}
+TicTacToeManager:: TicTacToeManager(TicTacToeData data): data(data)
 {
-    games = data.get_games();
+    vector<unique_ptr<TicTacToe>> games = data.get_games();
     for (auto& game : games)
     {
         update_winner_count(game->get_winner());
@@ -51,5 +51,5 @@ TicTacToeManager:: TicTacToeManager(TicTacToeData d): data{d}
 
 TicTacToeManager:: ~TicTacToeManager()
 {
-    data().save_games(games);
+    data.save_games(games);
 }

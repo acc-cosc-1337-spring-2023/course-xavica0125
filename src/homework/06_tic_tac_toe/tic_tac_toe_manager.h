@@ -19,8 +19,9 @@ class TicTacToeManager
         int o_win = 0;
         int ties = 0;
         void update_winner_count(string winner);
-        TicTacToeData data();
+        TicTacToeData data;
     public:
+        TicTacToeManager() {}
         TicTacToeManager(TicTacToeData data);
         ~TicTacToeManager();
         void save_game(unique_ptr<TicTacToe>& game);

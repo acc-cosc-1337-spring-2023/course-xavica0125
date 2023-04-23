@@ -20,8 +20,10 @@ bool TicTacToe::check_board_full()
 
 void TicTacToe::clear_board()
 {
-    pegs.resize(9);
-    std::fill(pegs.begin(),pegs.end()," ");
+    for(string& peg: pegs)
+    {
+        peg = " ";
+    }
 }
 
 void TicTacToe::set_next_player()
@@ -133,7 +135,7 @@ std::istream& operator>>(std::istream& num, TicTacToe& game)
     return num;
 }
 
-std::ostream& operator<<(std::ostream& out,const TicTacToe& game)
+std::ostream& operator<<(std::ostream& out, TicTacToe& game)
 {
     if(game.pegs.size() == 9)
     {
@@ -214,3 +216,4 @@ void scoreboard(TicTacToeManager& manager)
 		cout << "X Wins: " << x_wins <<"\n";
 		cout << "Ties: " << ties <<"\n";
 }
+       
